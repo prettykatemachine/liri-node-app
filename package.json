@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/prettykatemachine/liri-node-app/issues"
   },
-  "homepage": "https://github.com/prettykatemachine/liri-node-app#readme"
+  "homepage": "https://github.com/prettykatemachine/liri-node-app#readme",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "logger": "0.0.1",
+    "node": "^10.0.0",
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.86.0",
+    "simple": "^0.2.0",
+    "simple-node-logger": "^0.93.37",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.1"
+  }
 }
