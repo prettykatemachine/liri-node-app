@@ -19,6 +19,7 @@
   "homepage": "https://github.com/prettykatemachine/liri-node-app#readme",
   "dependencies": {
     "dotenv": "^5.0.1",
+    "fs": "0.0.1-security",
     "logger": "0.0.1",
     "node": "^10.0.0",
     "node-spotify-api": "^1.0.7",

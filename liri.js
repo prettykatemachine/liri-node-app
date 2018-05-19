@@ -1,170 +1,117 @@
 require("dotenv").config();
 
-var Twitter = require("twitter");
-var twitterKeysFile = require("./keys.js");
-var spotify = require("spotify");
-var request = require("request");
+var command = process.argv[2];
+var action = process.argv[3];
+var Twitter = require('twitter');
+var params = {
+    screen_name: '@_katecodes',
+    count: 20
+    };
+var keys = require('./keys');
+var client = new Twitter(keys.twitterKeys);
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify({
+    id: 'ad9cd0f443ed4e6e8e13df8ad8382781',
+    secret: 'ee01c627d21347fe9e1829dbe622a28a'
+    });
+var request = require('request');
 var fs = require("fs");
 var filename = './log.txt';
 var log = require('simple-node-logger').createSimpleFileLogger(filename);
 
 log.setLevel('all');
 
-
-var action = process.argv[2];
-var argument = "";
-
-doSomething(action, argument);
-
-function doSomething(action, argument) {
-    argument = getThirdArgument();
-
-    switch (action) {
-        case "my-tweets":
-            getMyTweets();
-            break;
-
-        case "spotify-this-song":
-            var songTitle = argument;
-            if (songTitle === "") {
-                lookupSpecificSong();
-            } else {
-
-                getSongInfo(songTitle);
-            }
-            break;
-
-        case "movie-this":
-            var movieTitle = argument;
-            if (movieTitle === "") {
-                getMovieInfo("Mr. Nobody");
-            } else {
-                getMovieInfo(movieTitle);
-            }
-            break;
-        case "do-what-it-says":
-            doWhatItSays();
-            break;
-    }
+//Switch break statements
+switch (command) {
+    case 'my-tweets':
+        myTweets();
+        break;
+    case 'spotify-this-song':
+        spotifyThis(action);
+        break;
+    case 'movie-this':
+        movieThis(action);
+        break;
+    case 'do-what-it-says':
+        random();
+        break;
 }
 
-function getThirdArgument() {
-    argumentArray = process.argv;
-    for (var i = 3; i < argumentArray.length; i++) {
-        argument += argumentArray[i];
-    }
-    return argument;
-}
-
-function getMyTweets() {
-    var client = new Twitter(twitterKeysFile.twitterKeys);
-
-    var params = {
-        q: '@_katecodes',
-        count: 20
-    };
-
-    client.get('search/tweets', params, function (error, tweets, response) {
+//Twitter Things
+function myTweets() {
+    
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
-
-            for (var i = 0; i < tweets.statuses.length; i++) {
-                var tweetText = tweets.statuses[i].text;
-                logOutput("Tweet Text: " + tweetText);
-                var tweetCreationDate = tweets.statuses[i].created_at;
-                logOutput("Tweet Creation Date: " + tweetCreationDate);
+            for (i = 0; i < tweets.length; i++) {
+                var number = i + 1;
+               
+                console.log([i + 1] + '. ' + tweets[i].text);
+                console.log('Tweeted on: ' + tweets[i].created_at);
+               
             }
-        } else {
-            logOutput(error);
         }
     });
 }
 
-// Calls Spotify API to retrieve song info
-function getSongInfo(songTitle) {
 
-    // Calls Spotify API to grab a song.
+//Spotify Stuff
+function spotifyThis(action) {
+   
+     if (action == null) {
+        action = 'The Sign';
+    }
     spotify.search({
-        type: 'track',
-        query: songTitle
-    }, function (err, data) {
-        if (err) {
-            logOutput.error(err);
-            return
-        }
-
-        var artistsArray = data.tracks.items[0].album.artists;
-
-        // Array for artist 
-        var artistsNames = [];
-
-        for (var i = 0; i < artistsArray.length; i++) {
-            artistsNames.push(artistsArray[i].name);
-        }
-
-        var artists = artistsNames.join(", ");
-
-        logOutput("Artist(s): " + artists);
-        logOutput("Song: " + data.tracks.items[0].name)
-        logOutput("Spotify Preview URL: " + data.tracks.items[0].preview_url)
-        logOutput("Album Name: " + data.tracks.items[0].album.name);
-    });
-
-}
-
-function lookupSpecificSong() {
-//Defaults to Ace of Base- The Sign
-    spotify.lookup({
-        type: 'track',
-        id: '3DYVWvPh3kGwPasp7yjahc'
-    }, function (err, data) {
-        if (err) {
-            logOutput.error(err);
-            return
-        }
-        // Displays song info
-        logOutput("Artist: " + data.artists[0].name);
-        logOutput("Song: " + data.name);
-        logOutput("Spotify Preview URL: " + data.preview_url);
-        logOutput("Album Name: " + data.album.name);
+    	type: 'action',
+    	query: action 
+    }, function(error, data) {
+        if (error) {
+        	console.log('Error occurred: ' + error);
+        	return;
+			}
+           
+            logOutput('Artist: ' + data.actions.items[0].artists[0].name);
+            logOutput('Song: ' + data.actions.items[0].name);
+            logOutput('Spotify Preview: ' + data.actions.items[0].preview_url);
+            logOutput('Albu Name: ' + data.actions.items[0].album.name);
+           
     });
 }
 
 
-function getMovieInfo(movieTitle) {
-    // OMDB Request
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&tomatoes=true&r=json";
-
-    request(queryUrl, function (error, response, body) {
+//OMDB 
+function movieThis(action) {
+   
+    if (action == null) {
+        action = 'Mr. Nobody';
+    }
+    request("http://www.omdbapi.com/?t="+action+"&y=&plot=short&apikey=trilogy", function(error, response, body) {
         if (!error && response.statusCode === 200) {
-            var movie = JSON.parse(body);
-            // Prints out movie info.
-            logOutput("Movie Title: " + movie.Title);
-            logOutput("Release Year: " + movie.Year);
-            logOutput("IMDB Rating: " + movie.imdbRating);
-            logOutput("Country Produced In: " + movie.Country);
-            logOutput("Language: " + movie.Language);
-            logOutput("Plot: " + movie.Plot);
-            logOutput("Actors: " + movie.Actors);
-            logOutput("Rotten Tomatoes Rating: " + movie.Ratings[2].Value);
-            logOutput("Rotten Tomatoes URL: " + movie.tomatoURL);
+           
+            logOutput('Movie Title: ' + JSON.parse(body).Title);
+            logOutput('Release Year: ' + JSON.parse(body).Year);
+            logOutput('IMDb Rating: ' + JSON.parse(body).imdbRating);
+            logOutput('Country: ' + JSON.parse(body).Country);
+            logOutput('Language: ' + JSON.parse(body).Language);
+            logOutput('Plot: ' + JSON.parse(body).Plot);
+            logOutput('Lead Actors: ' + JSON.parse(body).Actors);
+           
         }
     });
 }
 
-function doWhatItSays() {
 
-    fs.readFile("random.txt", "utf8", function (err, data) {
-        if (err) {
-            logOutput.error(err);
+function random() {
+  
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            console.log(error);
         } else {
-            var randomArray = data.split(",");
-            action = randomArray[0];
-            argument = randomArray[1];
-            doSomething(action, argument);
+           
+            spotifyThis(data[3]);
         }
+
     });
 }
-
 function logOutput(logText) {
     log.info(logText);
     console.log(logText);

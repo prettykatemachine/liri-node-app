@@ -13,3 +13,31 @@
 12:41:45.920 INFO  [{"code":32,"message":"Could not authenticate you."}] 
 12:42:09.001 INFO  [{"code":32,"message":"Could not authenticate you."}] 
 12:45:49.295 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+14:44:59.709 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+14:46:12.616 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+15:08:27.361 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+15:51:57.815 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+
+* New Search - my-tweets - undefined *
+
+Error: [object Object]
+
+* New Search - undefined - undefined *
+
+That is not a valid action.
+21:53:33.945 INFO  [{"code":32,"message":"Could not authenticate you."}] 
+22:14:51.667 INFO  Artist: Ty Dolla $ign 
+22:14:51.668 INFO  Song: Or Nah (feat. The Weeknd, Wiz Khalifa and DJ Mustard) - Remix 
+22:14:51.668 INFO  Spotify Preview: https://p.scdn.co/mp3-preview/70f126c139847335bc03c756c55b80c99892268e?cid=ad9cd0f443ed4e6e8e13df8ad8382781 
+22:14:51.668 INFO  Albu Name: Or Nah (feat. The Weeknd, Wiz Khalifa and DJ Mustard) [Remix Version] 
+22:23:18.839 INFO  Artist: A$AP Rocky 
+22:23:18.843 INFO  Song: Bad Company 
+22:23:18.843 INFO  Spotify Preview: https://p.scdn.co/mp3-preview/53e29050d98e558ccf619e1cb64065008c6aaca3?cid=ad9cd0f443ed4e6e8e13df8ad8382781 
+22:23:18.843 INFO  Albu Name: Bad Company 
+22:28:49.354 INFO  Movie Title: Inception 
+22:28:49.354 INFO  Release Year: 2010 
+22:28:49.355 INFO  IMDb Rating: 8.8 
+22:28:49.356 INFO  Country: USA, UK 
+22:28:49.356 INFO  Language: English, Japanese, French 
+22:28:49.357 INFO  Plot: A thief, who steals corporate secrets through the use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO. 
+22:28:49.358 INFO  Lead Actors: Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy 
