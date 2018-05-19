@@ -41,3 +41,17 @@ That is not a valid action.
 22:28:49.356 INFO  Language: English, Japanese, French 
 22:28:49.357 INFO  Plot: A thief, who steals corporate secrets through the use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO. 
 22:28:49.358 INFO  Lead Actors: Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy 
+08:13:38.308 INFO  Movie Title: Inception 
+08:13:38.311 INFO  Release Year: 2010 
+08:13:38.313 INFO  IMDb Rating: 8.8 
+08:13:38.315 INFO  Country: USA, UK 
+08:13:38.315 INFO  Language: English, Japanese, French 
+08:13:38.316 INFO  Plot: A thief, who steals corporate secrets through the use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO. 
+08:13:38.317 INFO  Lead Actors: Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy 
+10:33:14.132 INFO  Movie Title: Mr. Nobody 
+10:33:14.140 INFO  Release Year: 2009 
+10:33:14.140 INFO  IMDb Rating: 7.9 
+10:33:14.141 INFO  Country: Belgium, Germany, Canada, France, USA, UK 
+10:33:14.141 INFO  Language: English, Mohawk 
+10:33:14.142 INFO  Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible. 
+10:33:14.143 INFO  Lead Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham 

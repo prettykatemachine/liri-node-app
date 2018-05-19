@@ -4,7 +4,7 @@ var command = process.argv[2];
 var action = process.argv[3];
 var Twitter = require('twitter');
 var params = {
-    screen_name: '@_katecodes',
+    follow: 996853478348738561,
     count: 20
     };
 var keys = require('./keys');
@@ -24,7 +24,7 @@ log.setLevel('all');
 //Switch break statements
 switch (command) {
     case 'my-tweets':
-        myTweets();
+        myTweets(action);
         break;
     case 'spotify-this-song':
         spotifyThis(action);
@@ -38,17 +38,21 @@ switch (command) {
 }
 
 //Twitter Things
-function myTweets() {
+function myTweets(action) {
     
-    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    client.get('statuses/user_timeline/', params, function(error, tweets, response) {
         if (!error) {
             for (i = 0; i < tweets.length; i++) {
-                var number = i + 1;
-               
+                // var number = i + 1;
                 console.log([i + 1] + '. ' + tweets[i].text);
                 console.log('Tweeted on: ' + tweets[i].created_at);
+                logOutput([i + 1] + '. ' + tweets[i].text);
+                logOutput('Tweeted on: ' + tweets[i].created_at);
                
             }
+        }
+        else {
+            throw error;
         }
     });
 }
