@@ -79,7 +79,7 @@ function spotifyThis(action) {
             logOutput('Albu Name: ' + data.actions.items[0].album.name);
            
     });
-}
+}  
 
 
 //OMDB 
